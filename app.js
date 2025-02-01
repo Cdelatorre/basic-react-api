@@ -5,6 +5,7 @@ const router = require("./routes/routes");
 const mongoose = require("mongoose");
 const createError = require("http-errors");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
@@ -39,11 +40,9 @@ app.use((error, req, res, next) => {
     error = createError(400, "Resource not found");
   } else if (error.message.includes("E11000")) {
     error = createError(400, "Resource already exists");
-  }
-  // else if (error instanceof jwt.JsonWebTokenError) {
-  //   error = createError(401, error);
-  // }
-  else if (!error.status) {
+  } else if (error instanceof jwt.JsonWebTokenError) {
+    error = createError(401, error);
+  } else if (!error.status) {
     error = createError(500);
   }
 
