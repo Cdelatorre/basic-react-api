@@ -16,6 +16,7 @@ module.exports.list = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   User.findById(req.params.id)
+    .populate("posts")
     .then((user) => res.status(200).json(user))
     .catch((err) => {
       res.status(500).json(err);

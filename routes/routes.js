@@ -41,5 +41,6 @@ router.delete("/posts/:id", isAuthenticated, postController.delete);
 /* LIKES */
 
 router.post("/posts/:postId/like", isAuthenticated, likesController.like);
+router.get("/likes", isAuthenticated, likesController.list);
 
 module.exports = router;

@@ -39,6 +39,7 @@ module.exports.login = (req, res, next) => {
           process.env.JWT_SECRET || "changeme",
           { expiresIn: "1d" }
         );
+        //klahsdklahslfbaosd,. 12903u190239012u309234,2189472984912849012
         res.json({ accessToken: token });
       });
     })

@@ -3,6 +3,24 @@ const Like = require("../models/Like.model");
 
 // Get all posts
 module.exports.list = async (req, res) => {
+  const filters = {};
+  /*
+
+  URL -> http://localhost:3000/posts?user=89172389127391&caption=italia&createdAt=12-02-2025
+
+  {
+    user: '1o2738912739123',
+    caption: 'italia',
+    createdAt: '12-02-2025',
+  }
+
+
+  // */
+
+  if (req.query.user) filters.user = req.query.user;
+  if (req.query.caption) filters.caption = req.query.caption;
+  if (req.query.createdAt) filters.createdAt = req.query.createdAt;
+
   try {
     const posts = await Post.find().populate("user").populate("likes");
     const likes = await Like.find({ user: req.currentUserid });
@@ -70,3 +88,32 @@ module.exports.delete = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+/*
+MODEL:
+
+CHAT = {
+  _id: '123',
+  users: ['
+    123',
+    '123',
+  ],
+  messages: [
+    {
+      _id: '123
+      user: '123',
+      text: 'Hola',
+      createdAt: '2021-09-01T12:00:00Z',
+    },
+    {
+      _id: '123
+      user: '123',
+      text: 'Hola',
+      createdAt: '2021-09-01T12:00:00Z',
+    },
+}
+
+
+
+
+*/
