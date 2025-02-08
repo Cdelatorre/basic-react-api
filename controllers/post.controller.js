@@ -5,16 +5,13 @@ const Like = require("../models/Like.model");
 module.exports.list = async (req, res) => {
   const filters = {};
   /*
+    URL -> http://localhost:3000/posts?user=89172389127391&caption=italia&createdAt=12-02-2025
 
-  URL -> http://localhost:3000/posts?user=89172389127391&caption=italia&createdAt=12-02-2025
-
-  {
-    user: '1o2738912739123',
-    caption: 'italia',
-    createdAt: '12-02-2025',
-  }
-
-
+    {
+      user: '1o2738912739123',
+      caption: 'italia',
+      createdAt: '12-02-2025',
+    }
   // */
 
   if (req.query.user) filters.user = req.query.user;

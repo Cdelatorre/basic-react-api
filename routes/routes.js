@@ -6,6 +6,8 @@ const usersController = require("../controllers/users.controller");
 const postController = require("../controllers/post.controller");
 const authController = require("../controllers/auth.controller");
 const likesController = require("../controllers/likes.controller");
+const chatController = require("../controllers/chat.controller");
+const messageController = require("../controllers/message.controller");
 const { isAuthenticated } = require("../middlewares/auth.middleware");
 
 const upload = require("../config/storage.config");
@@ -42,5 +44,20 @@ router.delete("/posts/:id", isAuthenticated, postController.delete);
 
 router.post("/posts/:postId/like", isAuthenticated, likesController.like);
 router.get("/likes", isAuthenticated, likesController.list);
+
+/* CHATS */
+
+router.get("/chats", isAuthenticated, chatController.list);
+router.get("/chats/:chatId", isAuthenticated, chatController.detail);
+router.post("/chats", isAuthenticated, chatController.create);
+router.delete("/chats/:chatId", isAuthenticated, chatController.delete);
+
+/* MESSAGES */
+
+router.post(
+  "/chats/messages/create",
+  isAuthenticated,
+  messageController.create
+);
 
 module.exports = router;
