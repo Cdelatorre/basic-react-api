@@ -13,7 +13,10 @@ require("./config/db.config");
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "https://basic-react-app-kohl.vercel.app",
+    ],
   })
 );
 
